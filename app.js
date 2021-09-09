@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));        //will join dirn
 
 //Set security HTTP headers (has to be the very 1st middleware to set all the security headers)
 app.use(helmet());      //helmet() returns a function that will be called, hence we have to call helemt immediately with () here.
+//updated the resoponse of tour.pug template in viewRoutes.js.
 
 // app.use(
 //     helmet({
