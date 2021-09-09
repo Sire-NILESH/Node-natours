@@ -7,7 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -100,12 +100,14 @@ app.use(
 );
 
 
+//for compression of text/json other responses.
+app.use(compression());
 
 
 // custom middleware
 app.use((req, res, next) =>{
     //console.log('hello from the middleware');
-    console.log(req.cookies);
+    //console.log(req.cookies);
     next();
 });
 

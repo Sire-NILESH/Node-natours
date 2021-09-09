@@ -84,7 +84,7 @@ reviewSchema.statics.calcAverageRatings = async function(tourId) {
         }
     ]);
 
-    console.log(stats);
+    //console.log(stats);
 
 
     if(stats.length > 0) {              //if any reviews
@@ -113,7 +113,7 @@ reviewSchema.post('save', function(){
 
 reviewSchema.pre(/^findOneAnd/, async function(next) {
     this.r = await this.findOne();  //hack:create a handy document 'r'and put it onto the document.
-    console.log(this.r);
+    //console.log(this.r);
     next();
 });
 

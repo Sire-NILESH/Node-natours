@@ -212,11 +212,11 @@ tourSchema.pre(/^find/, function(next) { //regular expression that will match an
 })
 
 
-tourSchema.post(/^find/, function (docs, next) {
-    console.log(`Query took ${Date.now() - this.start} millisesecs`);
-    //console.log(docs);
-    next();
-});
+// tourSchema.post(/^find/, function (docs, next) {
+//     console.log(`Query took ${Date.now() - this.start} millisesecs`);
+//     //console.log(docs);
+//     next();
+// });
 
 
 //Aggregation middlewares('this' points to the current aggregation object)
