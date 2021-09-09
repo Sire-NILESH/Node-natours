@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet' href='/css/style.css')
+
+        link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700' )
+        //- script(src='https://js.stripe.com/v3/')
+        //- script(src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js')
+        //- link(rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css')
+        block head
+             
+
+            //- <meta http-equiv="Content-Security-Policy" content= "script-src 'self' mapbox.com; "/>
+            //- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; child-src 'https://api.mapbox.com'; object-src 'none'">
+
+
+            link(rel='stylesheet' href='/css/style.css')
+            //- <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+            //- //- link(rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css')
+            //- link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+            //- link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700' )
+            title Natours | #{title}
+
+            
+
+    body
+
+        // Header
+        include _header
+
+        // Content
+        block content 
+            h1 This is a place holder
+    
+        // Footer
+        include _footer
+
+        //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js')
+        script(src='/js/bundle.js')
+
