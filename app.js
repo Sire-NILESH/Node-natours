@@ -21,6 +21,8 @@ const viewRouter = require('./routes/viewRoutes');
 const app = express();
 //app.use(express.json());    //app.use() defines a middleware. Every data we get from the client will go through this middleware and get converted into a JSON. 
 
+//to enable to trust proxy like heroku
+app.enable('trust proxy');
 
 //Using 'app.set()' setting up rendering engine config: 'view engine' and 'views'
 app.set('view engine', 'pug');               //pug is built in supported so no need to require it but install it from npm.
