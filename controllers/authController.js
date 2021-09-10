@@ -12,19 +12,29 @@ const signToken = function (id) {
 };
 
 
-const createSendToken = function (user, statusCode, res) {
+const createSendToken = function (user, statusCode, req, res) {
     const token = signToken(user._id);
-    const cookieOptions = { 
+
+    res.cookie('jwt', token, { 
         expires: new Date(
             Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
-        //secure: true, //will be set below according to ENVIORNMENT.
         httpOnly: true,
-    };
+        secure: req.secure || req.headers('x-forwarded-proto') === 'https'
+    });
 
-    if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    // old, unsecure and deprecated.
+    // const cookieOptions = { 
+    //     expires: new Date(
+    //         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    //     ),
+    //     //secure: true, //will be set below according to ENVIORNMENT.
+    //     httpOnly: true,
+    // };
 
-    res.cookie('jwt', token, cookieOptions);
+    // if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+    // res.cookie('jwt', token, cookieOptions);
 
     user.password = undefined;
 
@@ -71,7 +81,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     //await this first and only then below code will be executed.
     await new Email(newUser, url).sendWelcome();    //'sendWelocme()' is a function on Email class.
 
-    createSendToken(newUser, 201, res);
 });
 
 
@@ -91,7 +100,7 @@ exports.login = catchAsync(async (req, res, next) => {
     }
 
     //if everything is ok, send token to client
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
 
 
@@ -263,7 +272,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         //implementd as pre save hook inside userModel.js
 
     // 4) Log the user in, send new JWT
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
     
 });
 
@@ -287,7 +296,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 
     //4) Log user in, send new JWT
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 
 });
 
