@@ -53,3 +53,12 @@ process.on('unhandledRejection', err =>{
     process.exit(1);    // Code- 0: success, 1: uncaught exception.
   });
 });
+
+
+//handling heroku's sigterm event signal.
+process.on('SIGTERM', () =>{
+  console.log('SIGTERM received, shutting down gracefully...');
+  server.close(() => { 
+    console.log('Process terminated!');
+  });
+});
