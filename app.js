@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -30,6 +31,24 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // GLOBAL middlewares
+
+
+// Implements CORS
+
+//for simple GET and POST
+app.use(cors());        //'cors()' returns a function which will be called by express.
+//Access-Control-Allow-Origin *         set to all
+//request to api.natours.com from front end on natours.com is not allowed by default due to being on different domains by the CORS.
+//to allow that domain
+// app.use(cors({
+//     origin: 'https://www.natours.com'
+// }));
+
+//For non simple PUT, PATCH and DELETE due to their pre-flight phase policy.
+app.options('*', cors());   //'options' is like any other GET, PUT PATCH verb, sent by browsers to server before sending nonismple PUT, PATCH and DELETE asking for permissions called as pre-flight phase. Allow those requests from the server by sending the Access-Control-Allow-Origin header to that requesting browser.
+//this handler here will send CORS for all type of requests from any domain *.
+
+
 
 //Serving static files
 //app.use(express.static(`${__dirname}/public`));
